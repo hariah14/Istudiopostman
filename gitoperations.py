@@ -37,7 +37,6 @@ class GitRepo:
 
     def add_remote(self, remote_name, remote_url):
         os.chdir(self.repo_path) # change current working directory to local repository
-        os.system(f'git remote add {remote_name} {remote_url}') # add a new Git remote
         output = os.popen('git remote show').read() # get output of git remote show command
         if 'origin' in output:
             print('Remote "origin" already exists.')
