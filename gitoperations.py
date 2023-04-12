@@ -38,6 +38,18 @@ class GitRepo:
     def add_remote(self, remote_name, remote_url):
         os.chdir(self.repo_path) # change current working directory to local repository
         os.system(f'git remote add {remote_name} {remote_url}') # add a new Git remote
+        output = os.popen('git remote show').read() # get output of git remote show command
+        if 'origin' in output:
+            print('Remote "origin" already exists.')
+            return False
+        else:
+            os.system(f'git remote add {remote_name} {remote_url}') # add a new Git remote
+            return True        
+
+    def pull(self,branch_name):
+        os.chdir(self.repo_path) # change current working directory to local repository
+        os.system(f'git pull origin {branch_name}') # execute 'git pull' command
+        print('Git pull complete.')
 
     def add_to_index(self, file_path):
         os.chdir(self.repo_path) # change current working directory to local repository
@@ -65,13 +77,19 @@ repo.set_config('user.name', 'Harish')  # set local Git config option for user n
 
 repo.set_config('user.email', 'harish.puvvada@hcl.com')  # set local Git config option for user email
 
-repo.add_remote('origin', 'https://github.com/hariah14/Istudiopostman.git')  # add a new Git remote
+success = repo.add_remote('origin', 'https://github.com/hariah14/Istudiopostman.git')  # add a new Git remote
+if success:
+    print('Remote added successfully.')
+else:
+    print('Failed to add remote.')
+
+repo.pull('master')
 
 repo.add_to_index('.')  # add changes to file.txt to Git index
 
 repo.commit("pushing through python")
 
-repo.push_changes('master')  # push changes to remote Git repository branch named "main"
+repo.push_changes('master')  # push changes to remote Git repository branch named "master"
 
 # repo.push_changes('https://github.com/hariah14/Istudiopostman.git')  # push changes to remote Git repository branch named "main"
 
