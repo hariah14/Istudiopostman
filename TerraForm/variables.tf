@@ -20,7 +20,7 @@ variable "virtual_network_address_prefix" {
 }
 variable "aks_subnet_name_1" {
   description = "AKS Subnet Name."
-  default     = "harishsubnet101101"
+  default     = "harishsubnet1"
 }
 variable "aks_subnet_address_prefix_1" {
   description = "Containers DNS server IP address."
