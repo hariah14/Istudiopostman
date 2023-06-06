@@ -18,7 +18,7 @@ resource "azurerm_virtual_network" "virtualnet" {
   tags = "${var.tags}"
 }
 
-data "azurerm_subnet" "harishsubnet121-1" {
+data "azurerm_subnet" "cbtestsubnet-1" {
   name                 = "${var.aks_subnet_name_1}-1"
   virtual_network_name = "${azurerm_virtual_network.virtualnet.name}"
   resource_group_name  = "${azurerm_resource_group.k8s.name}"
